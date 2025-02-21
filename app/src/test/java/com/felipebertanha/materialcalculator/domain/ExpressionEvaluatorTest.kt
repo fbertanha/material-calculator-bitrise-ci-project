@@ -11,7 +11,7 @@ class ExpressionEvaluatorTest {
         // 4+5-3x5/3
         evaluator = ExpressionEvaluator(
             listOf(
-                ExpressionPart.Number(4.0),
+                ExpressionPart.Number(-4.0),
                 ExpressionPart.Op(Operation.ADD),
                 ExpressionPart.Number(5.0),
                 ExpressionPart.Op(Operation.SUBTRACT),
@@ -25,7 +25,7 @@ class ExpressionEvaluatorTest {
 
         val actual = evaluator.evaluate()
 
-        val expected = 4
+        val expected = -4
 
         assertThat(actual).isEqualTo(expected)
     }

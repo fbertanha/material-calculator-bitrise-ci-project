@@ -1,0 +1,66 @@
+package com.felipebertanha.materialcalculator.presentation.components
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
+import com.felipebertanha.materialcalculator.presentation.CalculatorUiAction
+import com.felipebertanha.materialcalculator.presentation.HighlightLevel
+import com.felipebertanha.materialcalculator.presentation.calculatorActions
+import com.felipebertanha.materialcalculator.ui.theme.MaterialCalculatorTheme
+
+@Composable
+fun CalculatorButton(
+    action: CalculatorUiAction,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .clip(CircleShape)
+            .background(
+                color = when (action.highlightLevel) {
+                    HighlightLevel.Neutral -> MaterialTheme.colorScheme.surfaceVariant
+                    HighlightLevel.SemiHighlighted -> MaterialTheme.colorScheme.inverseSurface
+                    HighlightLevel.Highlighted -> MaterialTheme.colorScheme.tertiary
+                    HighlightLevel.StronglyHighlighted -> MaterialTheme.colorScheme.primary
+                }
+            )
+            .clickable { onClick() }, contentAlignment = Alignment.Center
+    ) {
+
+        if (action.text != null) {
+            Text(
+                text = action.text,
+                fontSize = 36.sp,
+                textAlign = TextAlign.Center,
+                color = when (action.highlightLevel) {
+                    HighlightLevel.Neutral -> MaterialTheme.colorScheme.onSurfaceVariant
+                    HighlightLevel.SemiHighlighted -> MaterialTheme.colorScheme.inverseOnSurface
+                    HighlightLevel.Highlighted -> MaterialTheme.colorScheme.onTertiary
+                    HighlightLevel.StronglyHighlighted -> MaterialTheme.colorScheme.onPrimary
+                }
+            )
+        } else {
+            action.content()
+        }
+
+    }
+}
+
+@Preview
+@Composable
+private fun CalculatorButtonPreview() {
+    MaterialCalculatorTheme {
+        CalculatorButton(action = calculatorActions[0], onClick = {})
+    }
+}

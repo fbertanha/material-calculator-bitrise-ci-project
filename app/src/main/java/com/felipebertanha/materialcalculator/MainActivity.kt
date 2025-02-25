@@ -10,6 +10,9 @@ import com.felipebertanha.materialcalculator.ui.theme.MaterialCalculatorTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Constants.BASE_URL
+
         enableEdgeToEdge()
         setContent {
             MaterialCalculatorTheme {

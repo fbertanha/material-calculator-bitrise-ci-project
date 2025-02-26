@@ -1,0 +1,2 @@
+- Sample release notes
+- Another sample release notes
